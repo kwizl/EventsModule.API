@@ -13,6 +13,8 @@ Configure Services
 */
 // Configure Identity User, Roles and UserRoles
 builder.ConfigureIdentity();
+// Configure MySQL
+builder.ConfigureMySQL();
 
 // Configure the HTTP request pipeline.
 
