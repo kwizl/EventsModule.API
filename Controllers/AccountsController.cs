@@ -3,7 +3,6 @@ using EventsModule.API.Interfaces;
 using EventsModule.Data.Models;
 using EventsModule.Logic.Request;
 using EventsModule.Logic.Response;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
