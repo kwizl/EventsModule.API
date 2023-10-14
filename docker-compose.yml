@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  mysql:
+    image: mysql
+
+  events.api:
+    image: ${DOCKER_REGISTRY-}events.api
+    build:
+      context: .
+      dockerfile: ./Dockerfile

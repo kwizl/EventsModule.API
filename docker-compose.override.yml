@@ -1,0 +1,31 @@
+version: '3.4'
+
+networks:
+  bridge:
+
+services:
+  mysql:
+    container_name: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - /etc/mysql/conf.d
+    ports:
+      - 6603:6603
+
+  events.api:
+    container_name: events.api    
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "6002:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - bridge
