@@ -1,3 +1,5 @@
+using EventsModule.API.ConfigureServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+/*
+Configure Services
+*/
+// Configure Identity User, Roles and UserRoles
+builder.ConfigureIdentity();
 
 // Configure the HTTP request pipeline.
 

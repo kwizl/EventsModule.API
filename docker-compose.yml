@@ -9,3 +9,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+
+volumes:
+  mysql_data:
