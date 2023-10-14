@@ -77,8 +77,27 @@ namespace EventsModule.API.Controllers
             return NotFound(req);
         }
 
+        // Get with ID API
+        [HttpGet("Register/{ID}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmptyResult))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> RegisterParticipation(int ID, CancellationToken token)
+        {
+            var req = new RegisterRequest<EventResponse>() { ID = ID };
+
+            // Implements CQRS Pattern
+            var response = await _mediator.Send(req, token);
+            if (response != null)
+            {
+                return Ok(response);
+            }
+            return NotFound(req);
+        }
+
         // Get All API
-        [HttpGet]
+        [HttpPost]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResponse<EventResponse>))]
         public async Task<ActionResult<PagedResponse<EventResponse>>> GetAll(ListRequest request, CancellationToken token)
