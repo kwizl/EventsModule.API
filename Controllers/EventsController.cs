@@ -69,7 +69,6 @@ namespace EventsModule.API.Controllers
                     EndTime = response.EndTime,
                     StartTime = response.StartTime,
                     ID = response.ID,
-                    Name = response.Name,
                     Title = response.Title,
                     UserJson = jsonUser
                 };
