@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Data", "..\Eve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Logic", "..\EventsModule.Logic\EventsModule.Logic.csproj", "{2AA9DA3E-1569-45CB-A60B-F26638664450}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Test", "..\EventsModule.Test\EventsModule.Test.csproj", "{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2AA9DA3E-1569-45CB-A60B-F26638664450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA9DA3E-1569-45CB-A60B-F26638664450}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA9DA3E-1569-45CB-A60B-F26638664450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

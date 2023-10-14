@@ -2,11 +2,13 @@
 using EventsModule.Data.Models;
 using EventsModule.Logic.Request;
 using EventsModule.Logic.Response;
+using EventsModule.Logic.Wrapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using static IdentityServer4.Models.IdentityResources;
 
 namespace EventsModule.API.Controllers
 {
@@ -18,14 +20,18 @@ namespace EventsModule.API.Controllers
         private IMapper _mapper;
         private IMediator _mediator;
         private readonly UserManager<User> _userManager;
+        private readonly HttpClient _client;
 
-        public EventsController(IMediator mediator, IMapper mapper, UserManager<User> userManager)
+        public EventsController(IMediator mediator, IMapper mapper, UserManager<User> userManager, HttpClient client)
         {
             _mediator = mediator;
             _mapper = mapper;
             _userManager = userManager;
+            _client = client;
+            _client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
         }
 
+        // Create API
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
@@ -39,10 +45,11 @@ namespace EventsModule.API.Controllers
             return CreatedAtAction(nameof(Get), new { id = response.ID }, response);
         }
 
+        // Get with ID API
         [HttpGet("{ID}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EventResponse))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SingleEventResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int ID, CancellationToken token)
         {
@@ -52,23 +59,37 @@ namespace EventsModule.API.Controllers
             var response = await _mediator.Send(req, token);
             if (response != null)
             {
-                return Ok(response);
+                var jsonUser = await _client.GetFromJsonAsync<UserJson>("/users/1");
+
+                var res = new SingleEventResponse
+                {
+                    CreatedBy = response.CreatedBy,
+                    CreatedByID = response.CreatedByID,
+                    Description = response.Description,
+                    EndTime = response.EndTime,
+                    StartTime = response.StartTime,
+                    ID = response.ID,
+                    Name = response.Name,
+                    Title = response.Title,
+                    UserJson = jsonUser
+                };
+                return Ok(res);
             }
             return NotFound(req);
         }
 
+        // Get All API
         [HttpGet]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResponse<EventResponse>))]
-        public async Task<ActionResult<PagedResponse<EventResponse>>> GetAll([FromQuery] PaginationFilter filter, CancellationToken token)
+        public async Task<ActionResult<PagedResponse<EventResponse>>> GetAll(ListRequest request, CancellationToken token)
         {
-            var req = new ListRequest<EventResponse>() { filter = filter };
-
             // Implements CQRS Pattern
-            var response = await _mediator.Send(req, token);
+            var response = await _mediator.Send(request, token);
             return Ok(response);
         }
 
+        // Update API
         [HttpPut]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
@@ -88,23 +109,23 @@ namespace EventsModule.API.Controllers
             }
         }
 
-        [HttpPut]
-        [Consumes(MediaTypeNames.Application.Json)]
+        // Delete API
+        [HttpDelete("{ID}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EmptyResult))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(EventResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmptyResult))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(DeleteRequest<EventResponse>))]
         public async Task<IActionResult> Delete(int ID, CancellationToken token)
         {
-            // Implements CQRS Pattern
-            var response = await _mediator.Send(ID, token);
+            // Implement Wrapper for handling delete response
+            var req = new DeleteRequest<EventResponse>() { ID = ID };
 
-            if (response == null)
-                return NotFound(ID);
-            else
-            {   
-                return NoContent();
+            // Implement CQRS for Delete
+            var response = await _mediator.Send(req, token);
+            if (response.Success)
+            {
+                return Ok();
             }
+            return NotFound(req);
         }
     }
 }
