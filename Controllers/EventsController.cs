@@ -12,6 +12,7 @@ namespace EventsModule.API.Controllers
 {
     [ApiController]
     [Authorize]
+    [Route("ap1/[controller]")]
     public class EventsController : ControllerBase
     {
         private IMapper _mapper;
@@ -30,7 +31,7 @@ namespace EventsModule.API.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EventResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create(EventRequest request, CancellationToken token)
+        public async Task<IActionResult> Create(EventCreateRequest request, CancellationToken token)
         {
             // Implements CQRS Pattern
             var response = await _mediator.Send(request, token);
@@ -74,7 +75,7 @@ namespace EventsModule.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EmptyResult))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(EventResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(EventRequest request, CancellationToken token)
+        public async Task<IActionResult> Update(EventUpdateRequest request, CancellationToken token)
         {
             // Implements CQRS Pattern
             var response = await _mediator.Send(request, token);

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EventsModule.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
