@@ -8,17 +8,22 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-/*
-Configure Services
-*/
-// Configure Identity User, Roles and UserRoles
+// Configure Services
 builder.ConfigureIdentity();
-// Configure MySQL
+
 builder.ConfigureMySQL();
+
+builder.ConfigureAutoMapper();
+
+builder.ConfigureBearerToken();
+
+builder.ConfigureAuthentication();
 
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

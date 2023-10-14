@@ -13,7 +13,7 @@ namespace EventsModule.API.ConfigureServices
             {
                 option.Password.RequireLowercase = false;
                 option.Password.RequireNonAlphanumeric = false;
-                option.Password.RequiredLength = 6;
+                option.Password.RequiredLength = 8;
                 option.Password.RequireDigit = false;
             })
             .AddSignInManager<SignInManager<User>>()
