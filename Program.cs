@@ -1,4 +1,6 @@
 using EventsModule.API.ConfigureServices;
+using EventsModule.API.Extensions;
+using EventsModule.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,4 +31,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.MigrateDatabase<EventsModuleMySQLContext>().Run();
