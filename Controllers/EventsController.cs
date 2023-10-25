@@ -56,20 +56,21 @@ namespace EventsModule.API.Controllers
                 Ok,
                 _ => (ActionResult)NotFound(),
                 problem => Problem(problem.Description)
-            );
-
-            
+            );            
         }
 
         // Get All API
         [HttpPost]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResponse<EventResponse>))]
-        public async Task<ActionResult<PagedResponse<EventResponse>>> GetAll(ListRequest request, CancellationToken token)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<EventResponse>))]
+        public async Task<ActionResult<List<EventResponse>>> GetAll(ListRequest request, CancellationToken token)
         {
             // Implements CQRS Pattern
             var response = await _mediator.Send(request, token);
-            return Ok(response);
+            return response.Match(
+                Ok,
+                problem => Problem(problem.Description)
+            );
         }
 
         // Update API
