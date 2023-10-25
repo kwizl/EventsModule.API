@@ -10,8 +10,8 @@ namespace EventsModule.API.ConfigureServices
             // MySQL Configuration
             builder.Services.AddDbContext<EventsModuleMySQLContext>(options =>
             {
-                options.UseMySql(builder.Configuration.GetConnectionString("MySQLConnectionString"),
-                    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySQLConnectionString")));
+                options.UseMySql(builder.Configuration.GetConnectionString("MySQLConnectionStrings"),
+                    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySQLConnectionStrings")));
                 options.EnableSensitiveDataLogging(true);
             });
         }

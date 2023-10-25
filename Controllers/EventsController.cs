@@ -1,34 +1,24 @@
 ﻿using AutoMapper;
-using EventsModule.Data.Models;
 using EventsModule.Logic.Request;
 using EventsModule.Logic.Response;
 using EventsModule.Logic.Wrapper;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-using static IdentityServer4.Models.IdentityResources;
 
 namespace EventsModule.API.Controllers
 {
     [ApiController]
-    [Authorize]
-    [Route("ap1/[controller]")]
+    [Route("api/[controller]")]
     public class EventsController : ControllerBase
     {
         private IMapper _mapper;
         private IMediator _mediator;
-        private readonly UserManager<User> _userManager;
-        private readonly HttpClient _client;
 
-        public EventsController(IMediator mediator, IMapper mapper, UserManager<User> userManager, HttpClient client)
+        public EventsController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
-            _userManager = userManager;
-            _client = client;
-            _client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
         }
 
         // Create API
@@ -42,14 +32,19 @@ namespace EventsModule.API.Controllers
             // Implements CQRS Pattern
             var response = await _mediator.Send(request, token);
 
-            return CreatedAtAction(nameof(Get), new { id = response.ID }, response);
+            return response.Match(
+                // success - dto
+                dto => CreatedAtAction(nameof(Get), new { dto.ID }, dto),
+                // error
+                issue => Problem(issue.Description)
+            );
         }
 
         // Get with ID API
         [HttpGet("{ID}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SingleEventResponse))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EventResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int ID, CancellationToken token)
         {
@@ -57,43 +52,13 @@ namespace EventsModule.API.Controllers
 
             // Implements CQRS Pattern
             var response = await _mediator.Send(req, token);
-            if (response != null)
-            {
-                var jsonUser = await _client.GetFromJsonAsync<UserJson>("/users/1");
+            return response.Match(
+                Ok,
+                _ => (ActionResult)NotFound(),
+                problem => Problem(problem.Description)
+            );
 
-                var res = new SingleEventResponse
-                {
-                    CreatedBy = response.CreatedBy,
-                    CreatedByID = response.CreatedByID,
-                    Description = response.Description,
-                    EndTime = response.EndTime,
-                    StartTime = response.StartTime,
-                    ID = response.ID,
-                    Title = response.Title,
-                    UserJson = jsonUser
-                };
-                return Ok(res);
-            }
-            return NotFound(req);
-        }
-
-        // Get with ID API
-        [HttpGet("Register/{ID}")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmptyResult))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> RegisterParticipation(int ID, CancellationToken token)
-        {
-            var req = new RegisterRequest<EventResponse>() { ID = ID };
-
-            // Implements CQRS Pattern
-            var response = await _mediator.Send(req, token);
-            if (response != null)
-            {
-                return Ok(response);
-            }
-            return NotFound(req);
+            
         }
 
         // Get All API
@@ -119,12 +84,11 @@ namespace EventsModule.API.Controllers
             // Implements CQRS Pattern
             var response = await _mediator.Send(request, token);
 
-            if (response == null)
-                return NotFound(request);
-            else
-            {
-                return NoContent();
-            }
+            return response.Match(
+                _ => (ActionResult)NoContent(),
+                _ => NotFound(),
+                (issue) => Problem(issue.Description)
+            );
         }
 
         // Delete API
@@ -139,11 +103,14 @@ namespace EventsModule.API.Controllers
 
             // Implement CQRS for Delete
             var response = await _mediator.Send(req, token);
-            if (response.Success)
-            {
-                return Ok();
-            }
-            return NotFound(req);
+
+            return response.Match(
+                // Success
+                _ => (ActionResult)Ok(),
+                // Not found
+                _ => NotFound(),
+                // Problem
+                problem => Problem(problem.Description));
         }
     }
 }

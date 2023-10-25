@@ -13,7 +13,7 @@ services:
       - mysql_data:/var/lib/mysql
       - /etc/mysql/conf.d
     ports:
-      - 3306:3306
+      - 6606:3306
 
   events.api:
     container_name: events.api    
@@ -21,7 +21,8 @@ services:
     depends_on:
       - mysql
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
+      - "ConnectionStrings:MySQLConnectionString=server=localhost; port=6606; user=root; password=Kwizl1234!; database=EventsDB;"
     ports:
       - "8009:80"
     volumes:

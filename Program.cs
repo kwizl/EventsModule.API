@@ -1,5 +1,5 @@
 using EventsModule.API.ConfigureServices;
-using EventsModule.API.Extensions;
+using EventsModule.API.HostService;
 using EventsModule.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,27 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+// Configure Services
+builder.ConfigureMySQL();
+builder.ConfigureAutoMapper();
+builder.ConfigureDependencyInjection();
+builder.ConfigureMediatR();
+
 var app = builder.Build();
 
-// Configure Services
-builder.ConfigureIdentity();
-
-builder.ConfigureMySQL();
-
-builder.ConfigureAutoMapper();
-
-builder.ConfigureBearerToken();
-
-builder.ConfigureAuthentication();
-
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
-app.MigrateDatabase<EventsModuleMySQLContext>().Run();
+app.MigrateDatabase<EventsModuleMySQLContext>();
+app.Run();

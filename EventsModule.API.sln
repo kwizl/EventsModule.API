@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.API", "EventsModule.API.csproj", "{DAA71903-C6FD-4C31-9F12-94EB2CB88BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.API", "EventsModule.API.csproj", "{DAA71903-C6FD-4C31-9F12-94EB2CB88BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Data", "..\EventsModule.Data\EventsModule.Data.csproj", "{5A9BA2E7-4660-48F8-BB11-7BA567C2AAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.Data", "..\EventsModule.Data\EventsModule.Data.csproj", "{5A9BA2E7-4660-48F8-BB11-7BA567C2AAAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Logic", "..\EventsModule.Logic\EventsModule.Logic.csproj", "{2AA9DA3E-1569-45CB-A60B-F26638664450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.Logic", "..\EventsModule.Logic\EventsModule.Logic.csproj", "{2AA9DA3E-1569-45CB-A60B-F26638664450}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Test", "..\EventsModule.Test\EventsModule.Test.csproj", "{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.Test", "..\EventsModule.Test\EventsModule.Test.csproj", "{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.Core", "..\EventsModule.Core\EventsModule.Core.csproj", "{DB19057E-44C6-4562-B77F-927D904174C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C6D5BA5-650E-4E34-BB93-6726B4F9DA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB19057E-44C6-4562-B77F-927D904174C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB19057E-44C6-4562-B77F-927D904174C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB19057E-44C6-4562-B77F-927D904174C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB19057E-44C6-4562-B77F-927D904174C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

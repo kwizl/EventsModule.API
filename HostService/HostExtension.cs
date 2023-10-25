@@ -1,14 +1,15 @@
 ﻿using EventsModule.Data.Context;
+using EventsModule.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventsModule.API.Extensions
+namespace EventsModule.API.HostService
 {
     public static class HostExtension
     {
         // Connects to MySQL Server
         public static IHost MigrateDatabase<TContext>(this IHost host, int? retry = 0) where TContext : EventsModuleMySQLContext
         {
-            int retryForAvailability = retry.Value;
+            int retryForAvailability = retry!.Value;
 
             using (var scope = host.Services.CreateScope())
             {
@@ -28,6 +29,10 @@ namespace EventsModule.API.Extensions
                         retryForAvailability++;
                         Thread.Sleep(2000);
                         MigrateDatabase<TContext>(host, retryForAvailability);
+                    }
+                    else
+                    {
+                        throw new Exception(ex.Message);
                     }
                 }
             }
