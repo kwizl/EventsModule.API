@@ -36,7 +36,7 @@ namespace EventsModule.API.Controllers
                 // success - dto
                 dto => CreatedAtAction(nameof(Get), new { dto.ID }, dto),
                 // error
-                issue => Problem(issue.Description)
+                problem => Problem(problem.Description)
             );
         }
 
@@ -88,7 +88,7 @@ namespace EventsModule.API.Controllers
             return response.Match(
                 _ => (ActionResult)NoContent(),
                 _ => NotFound(),
-                (issue) => Problem(issue.Description)
+                (problem) => Problem(problem.Description)
             );
         }
 
