@@ -30,3 +30,57 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     networks:
       - bridge
+  
+  elasticsearch:
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    depends_on:
+      - mysql
+      - events.api
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/events_api_data
+    environment:
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      - xpack.watcher.enabled=false
+      - discovery.type=single-node
+    restart: unless-stopped
+    mem_limit: 1g
+    networks:
+      - bridge
+
+  kibana:
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch 
+      - events.api
+      - redis
+    environment:
+     - ELASTICSEARCH_URL=http://localhost:9200
+    restart: unless-stopped
+    mem_limit: 2g
+    networks:
+      - bridge
+
+  prometheus:
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    depends_on: 
+      - events.api
+      - mysql
+    networks:
+      - bridge
+
+  grafana:
+    container_name: grafana
+    depends_on: 
+      - events.api
+      - mysql
+    ports:
+      - 3000:3000
+    networks:
+      - bridge

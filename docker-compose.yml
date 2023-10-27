@@ -10,5 +10,21 @@ services:
       context: .
       dockerfile: ./Dockerfile
 
+  rabbitmq:
+    image: rabbitmq:management-alpine
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.9.0
+
+  prometheus:
+    image: prom/prometheus:latest
+
+  grafana:
+   image: grafana/grafana:latest
+
 volumes:
   mysql_data:
+  elasticsearch_data:  

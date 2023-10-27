@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.ConfigureMySQL();
 builder.ConfigureAutoMapper();
 builder.ConfigureDependencyInjection();
+builder.ConfigureLogging();
 builder.ConfigureMediatR();
 
 var app = builder.Build();
