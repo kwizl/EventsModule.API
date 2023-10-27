@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.Core", "..\Eve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsModule.Data", "..\EventsModule.Data\EventsModule.Data.csproj", "{31A703F0-8765-408A-AD73-B33CE84B679C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsModule.IdentityServer", "..\EventsModule.IdentityServer\EventsModule.IdentityServer.csproj", "{55F6A663-B3C9-470E-95A0-D615E7FCEA49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{31A703F0-8765-408A-AD73-B33CE84B679C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31A703F0-8765-408A-AD73-B33CE84B679C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31A703F0-8765-408A-AD73-B33CE84B679C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55F6A663-B3C9-470E-95A0-D615E7FCEA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F6A663-B3C9-470E-95A0-D615E7FCEA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F6A663-B3C9-470E-95A0-D615E7FCEA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F6A663-B3C9-470E-95A0-D615E7FCEA49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
