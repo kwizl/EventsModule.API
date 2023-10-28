@@ -3,6 +3,7 @@ using EventsModule.Logic.Request;
 using EventsModule.Logic.Response;
 using EventsModule.Logic.Wrapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
@@ -10,6 +11,7 @@ namespace EventsModule.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize("ClientIdPolicy")]
     public class EventsController : ControllerBase
     {
         private IMapper _mapper;

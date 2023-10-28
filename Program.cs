@@ -14,11 +14,13 @@ builder.ConfigureAutoMapper();
 builder.ConfigureDependencyInjection();
 builder.ConfigureLogging();
 builder.ConfigureMediatR();
+builder.ConfigureIdentityServer();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
