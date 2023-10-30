@@ -7,7 +7,7 @@ namespace EventsModule.API.ConfigureServices
         public static void ConfigureAutoMapper(this WebApplicationBuilder builder)
         {
             // Injects Automapper service
-            builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(EventMappingProfile).Assembly);
         }
     }
 }
