@@ -1,0 +1,12 @@
+D:\Source\Repos\EventsModule.Core\bin\Debug\net6.0\EventsModule.Core.deps.json
+D:\Source\Repos\EventsModule.Core\bin\Debug\net6.0\EventsModule.Core.dll
+D:\Source\Repos\EventsModule.Core\bin\Debug\net6.0\EventsModule.Core.pdb
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.csproj.AssemblyReference.cache
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.AssemblyInfoInputs.cache
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.AssemblyInfo.cs
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.csproj.CoreCompileInputs.cache
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.dll
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\refint\EventsModule.Core.dll
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\EventsModule.Core.pdb
+D:\Source\Repos\EventsModule.Core\obj\Debug\net6.0\ref\EventsModule.Core.dll

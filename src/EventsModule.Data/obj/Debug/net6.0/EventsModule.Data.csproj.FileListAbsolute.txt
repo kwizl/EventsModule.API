@@ -1,0 +1,14 @@
+D:\Source\Repos\EventsModule.Data\bin\Debug\net6.0\EventsModule.Data.deps.json
+D:\Source\Repos\EventsModule.Data\bin\Debug\net6.0\EventsModule.Data.runtimeconfig.json
+D:\Source\Repos\EventsModule.Data\bin\Debug\net6.0\EventsModule.Data.dll
+D:\Source\Repos\EventsModule.Data\bin\Debug\net6.0\EventsModule.Data.pdb
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.csproj.AssemblyReference.cache
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.AssemblyInfoInputs.cache
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.AssemblyInfo.cs
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.csproj.CoreCompileInputs.cache
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.dll
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\refint\EventsModule.Data.dll
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.pdb
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\EventsModule.Data.genruntimeconfig.cache
+D:\Source\Repos\EventsModule.Data\obj\Debug\net6.0\ref\EventsModule.Data.dll
