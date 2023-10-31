@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\EventsModule.API",
+    "\\src\\EventsModule.Client",
+    "\\src\\EventsModule.IdentityServer"
+  ],
+  "SelectedNode": "\\src\\EventsModule.Client\\EventsModule.Client.csproj",
+  "PreviewInSolutionExplorer": false
+}
