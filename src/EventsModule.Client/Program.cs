@@ -1,6 +1,10 @@
 using EventsModule.Client.ApiServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Serilog;
+using Serilog.Exceptions;
+using System.Diagnostics;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +19,9 @@ builder.Services.AddAuthentication(options =>
 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
-    options.Authority = "https://localhost:7165";
+    options.Authority = "https://localhost:7192";
 
-    options.ClientId = "eventsModule_mvc_client";
+    options.ClientId = "events_mvc_client";
     options.ClientSecret = "secret";
     options.ResponseType = "code";
 
@@ -26,6 +30,20 @@ builder.Services.AddAuthentication(options =>
 
     options.SaveTokens = true;
     options.GetClaimsFromUserInfoEndpoint = true;
+});
+
+builder.Host.UseSerilog((context, configuration) =>
+{
+    var applicationName = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly()!.Location).ProductName;
+    var applicationVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+    configuration.Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
+        .Enrich.WithMachineName()
+        .Enrich.FromLogContext()
+        .Enrich.WithExceptionDetails()
+        .Enrich.WithProperty("ApplicationName", applicationName!)
+        .Enrich.WithProperty("Version", applicationVersion!)
+        .WriteTo.Console();
 });
 
 var app = builder.Build();

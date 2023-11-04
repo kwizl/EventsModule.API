@@ -1,21 +1,50 @@
 ﻿using EventsModule.Client.ApiServices;
 using EventsModule.Data.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Serilog;
 
 namespace EventsModule.Client.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private readonly IEventApiService _service;
+        private readonly ILogger<EventController> _logger;
 
-        public EventController(IEventApiService service)
+        public EventController(IEventApiService service, ILogger<EventController> logger)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<IActionResult> Index()
         {
+            await LogTokenAndClaims();
             return View(await _service.GetEvents());
+        }
+
+        // Gets Token
+        public async Task LogTokenAndClaims()
+        {
+            var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+            Log.Debug("Identity Token: {V1}", identityToken);
+
+            foreach (var claim in User.Claims)
+            {
+                Log.Debug("Claim Type: {V1}. Claim Value: {V2}", claim.Type, claim.Value);
+            }
+        }
+
+        // Logout
+        public async Task Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
         }
 
         public async Task<IActionResult> Details(int? ID)

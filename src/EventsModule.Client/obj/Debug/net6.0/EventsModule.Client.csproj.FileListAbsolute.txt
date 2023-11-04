@@ -550,3 +550,16 @@ D:\Source\Repos\EventsApp\src\EventsModule.Client\obj\Debug\net6.0\refint\Events
 D:\Source\Repos\EventsApp\src\EventsModule.Client\obj\Debug\net6.0\EventsModule.Client.pdb
 D:\Source\Repos\EventsApp\src\EventsModule.Client\obj\Debug\net6.0\EventsModule.Client.genruntimeconfig.cache
 D:\Source\Repos\EventsApp\src\EventsModule.Client\obj\Debug\net6.0\ref\EventsModule.Client.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Enrichers.Environment.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Exceptions.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Extensions.Hosting.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Extensions.Logging.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Settings.Configuration.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Sinks.Console.dll
+D:\Source\Repos\EventsApp\src\EventsModule.Client\bin\Debug\net6.0\Serilog.Sinks.File.dll
